@@ -22,7 +22,7 @@ public class NotificationService {
     }
 
     public List<Notification> getNotificationHistory(UUID userId) {
-        return notificationRepository.findAllByUserIdAndDeletedIsFalse(userId);
+        return notificationRepository.findAllByUserIdAndDeletedFalse(userId);
     }
 
     public Notification createNotificationForUser(CreateNotificationRequest request) {
@@ -58,7 +58,6 @@ public class NotificationService {
             Notification notificationForUser = createNotificationForUser(request);
             publishedNotifications.add(notificationForUser);
         }
-        notificationRepository.saveAll(publishedNotifications);
         return publishedNotifications;
     }
 }
